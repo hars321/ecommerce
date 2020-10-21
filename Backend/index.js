@@ -6,7 +6,7 @@ const cors = require('cors');
 const con = require('./database/startConnection.js');
 const { timeStamp } = require('console');
 const { userInfo } = require('os');
-
+const port=process.env.PORT ||4000;
 const getData=require('./database/getData/getDataRoute');
 const putData=require('./database/putData/putDataRoute');
 const register=require('./database/register/registerRoute');
@@ -63,7 +63,7 @@ app.use('/location',location);
 
 // })
 
-app.listen(4000,(req,res)=>{
+app.listen(port,(req,res)=>{
     console.log('listening on 4000');
 })
 
