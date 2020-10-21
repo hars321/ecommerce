@@ -20,7 +20,7 @@ class App extends Component{
     }
     componentDidMount(){
         var shop_id=this.props.match.params.id;
-        fetch(`http://localhost:4000/shop/${shop_id}`).then(response=> response.json())
+        fetch(`https://onlineshop-api.herokuapp.com/shop/${shop_id}`).then(response=> response.json())
         .then(data=> {this.setState({value:data})
     });
 }

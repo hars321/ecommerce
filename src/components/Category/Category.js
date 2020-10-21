@@ -21,7 +21,7 @@ class Category extends Component{
             }
             return str;
         }
-        fetch('http://localhost:4000/getdata/category/4').then(res => res.json()).then(data=>
+        fetch('https://onlineshop-api.herokuapp.com/getdata/category/4').then(res => res.json()).then(data=>
            {console.log(data);
             
                 for(var i=0;i<data.length;i++){

@@ -22,7 +22,7 @@ class ShopNearby extends Component{
             var cards=[];
             var latitude=pos.latitude
             var longitude=pos.longitude;
-            fetch(`http://localhost:4000/getdata/seller?latitude=${latitude}&longitude=${longitude}&diameter=50`).then(res => res.json()).then(data=>
+            fetch(`https://onlineshop-api.herokuapp.com/getdata/seller?latitude=${latitude}&longitude=${longitude}&diameter=50`).then(res => res.json()).then(data=>
            {
             
                 for(var i=0;i<data.length;i++){

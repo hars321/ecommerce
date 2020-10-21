@@ -9,7 +9,7 @@ function submitData(data){
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
 };
-fetch('http://localhost:4000/add-new-product', requestOptions)
+fetch('https://onlineshop-api.herokuapp.com/add-new-product', requestOptions)
     .then(response => response.json())
                     
 }
