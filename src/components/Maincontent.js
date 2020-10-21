@@ -62,7 +62,7 @@ render(){
 
       
       <div className="browse-section ">
-        <div className="Category blur">
+        <div className="Category ">
           <div className="Category-Heading">
             <h1 className="categoryHeading">CATEGORY</h1>
           </div>
@@ -74,7 +74,7 @@ render(){
           <div className="Product-Heading">
             <h1 className="ProductHeading">PRODUCTS</h1>
           </div>
-          <div className="Product-List blur">
+          <div className="Product-List ">
               <Product/>
           </div>
         </div>
