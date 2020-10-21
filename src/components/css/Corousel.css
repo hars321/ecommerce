@@ -1,0 +1,24 @@
+.carousel-parent{
+    height: 60vh;
+    width: 100%;
+    border: black;
+    
+    border-bottom: solid;
+    border-top: solid;
+}
+.carousel-item img{
+    padding-top: 5px;
+    padding-bottom: 10px;
+    height: 60vh;
+}
+@media screen and (max-width: 800px) {
+    .carousel-parent{
+        height: 30vh;
+        width: 100%;
+    }
+    .carousel-item img{
+        padding-top: 5px;
+        padding-bottom: 10px;
+        height: 30vh;
+    }
+}

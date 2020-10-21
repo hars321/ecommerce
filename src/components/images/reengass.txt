@@ -1,0 +1,27 @@
+1-install Argouml
+2-try to build
+3-construct CFA
+4-static slicer indus
+4-dynamic call graph
+5-reverse engineering tool
+----------------------------------------
+1-Install eclipse
+2-Install ArgoUML source code
+3-Build ArgoUML (apache ant)
+4-construct dependency graph (DependencyFinder)
+5-construct CFG
+6-Choose 20 Unit tests and try to build the traceabilitiy links
+with its related source code.
+
+TestC1------C1
+Dynamic Call graph 
+Using Trace
+java org.Trace -output d:\TestActionAddAttribute.txt org.junit.runner.JUnitCore org.argouml.ui.targetmanager.TestActionAddAttribute
+
+C1,C2,C3,C4,C5
+
+Precision+Recall+F-measure
+
+7-use RE tool to draw class diagram derived from source code
+
+deadline 23/05

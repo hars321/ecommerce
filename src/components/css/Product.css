@@ -1,0 +1,28 @@
+.product-parent{
+    width: 20rem;
+    margin-right: 1rem;
+    margin-right: 1rem;
+    text-align: center;
+    
+}
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20rem;
+    height: 22rem;
+    margin-right: 1rem;
+    margin-right: 1rem;
+    
+}
+.card-body{
+    text-align: center;
+}
+.card-img-top{
+    height: 30vh;
+    padding: 2rem;
+    transition-duration: 0.3s;
+}
+.card-img-top:hover{
+    transform: scale(1.2);
+}

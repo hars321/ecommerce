@@ -1,0 +1,330 @@
+#include.<iostream>
+#include.<stdio.h>
+#include <iomanip>
+#include <fstream> // used for filing
+using namespace std;
+//struct.begins.here
+struct person_tag {
+   string.name;
+   string.id;
+};
+//struct of course begins here***************************
+struct.course_tag {
+    string course_name;
+    int no_of_units;
+    int marks[4];
+    float avg;
+};
+//struct of student starts here**************************
+struct student_tag {
+    struct.person_tag.student_info;
+    struct course_tag.course_info;
+};
+//this function reads file*******************************
+int read_file(string*, struct student_tag*);
+//menu for the user on console
+int menu();
+void.display_students(struct.student_tag *, int );
+void sort_by_name(struct student_tag *, int );
+void sort_by_average(struct student_tag *, int );
+int linearSearch(struct student_tag *, int, string);
+int binarySearch(struct student_tag *, int, int, string);
+int find_maximum(struct student_tag *, int);
+void update_file(string*, struct student_tag*);
+//main part of starts here************************************************
+int main()
+{
+    struct student_tag student_array[100];
+    int user_selection;
+    bool array_sorted = false;
+    int j;
+    //file name is students.txt
+    string filename = "students.txt";
+    cout<<"Welcome"<<endl;
+    int num_students = read_file(&filename, student_array);
+    while(true){
+        user_selection = menu();
+        if(user_selection == 1){
+            display_students(student_array, num_students);
+        }
+        else if(user_selection == 2){
+            int choice;
+            cout <<"sort"<<endl;
+            do{
+                cout <<"1. Sort wrt name"<<endl;
+                cout<<"2. Sort wrt average mark"<<endl;
+                cout<<"Input options:";
+                cin >> choice;
+                if(choice == 1){
+                    sort_by_name(student_array, num_students);
+                    array_sorted = true;
+                }
+                else if(choice == 2){
+                    sort_by_average(student_array, num_students);
+                }
+                else{
+                    cout <<"Please try again! Input you entered is invalid"<<endl; //if input is invalid then display error
+                }
+            } while (choice != 1 && choice != 2);
+        }
+        else if(user_selection == 3){
+            int choice, result;
+            cout <<"search"<<endl;
+            do {
+                string name;
+                cout <<"1. Linear Search"<<endl;
+                cout<<"2. Binary Search\nInput choice: ";
+                cin >> choice;
+                if(choice == 1){
+                    cout <<"Enter the name of student you wan to search: ";
+                    cin >> name;
+                    result = linearSearch(student_array, num_students, name);
+                    if(result == -1)
+                        cout <<"\nSearched name not found\n";
+                    else
+                        cout <<"\nSearched name found at position "<<result<<"\n";
+                }
+                else if(choice == 2){
+                    if(array_sorted != false) {
+                        cout <<"Enter the name of student you wan to search: ";
+                        cin >> name;
+                        result = binarySearch(student_array,0, num_students-1, name);
+                        if(result == -1)
+                            cout <<"\nSearched name not found\n";
+                        else
+                            cout <<"\nSearched name found at position "<<result<<"\n";
+                    }
+                    else
+                        cout <<"Can t perform binary search on unsorted array!!!\n\n";
+                }
+                else{
+                    cout <<"Please try again! Your input is invalid!\n"; //display error
+                }
+            } while(choice != 1 and choice != 2);
+        }
+        else if(user_selection == 4){
+            int max_average_position = find_maximum(student_array, num_students);
+            cout <<"\nDetails of student with maximum average: \n";
+            cout <<"\nName: "<<student_array[max_average_position].student_info.name;
+            cout <<"\nId: "<<student_array[max_average_position].student_info.id;
+            cout <<"\nCourse Name: "<<student_array[max_average_position].course_info.course_name;
+            cout <<"\nNumber of units: "<<student_array[max_average_position].course_info.no_of_units;
+            for(j=0; j<student_array[max_average_position].course_info.no_of_units; j++){
+                cout <<"\n" <<student_array[max_average_position].course_info.marks[j];
+            }
+            cout <<"\nAverage: "<<setprecision(2) << fixed << student_array[max_average_position].course_info.avg;
+        }
+        else if (user_selection == 5){
+            update_file(&filename, student_array);
+            num_students++;
+            array_sorted = false;
+        }
+        else if (user_selection == 6){
+            cout <<endl;
+            cout<<"Exiting the program"<<endl;
+            exit(0);
+        }
+    }
+    return EXIT_SUCCESS;
+}
+//function to read student data from file?************************************
+int read_file(string * filename, struct student_tag *student_array){
+    ifstream infile; //file object
+    string word; //here we are using it to store objects in file
+    int i, index;
+    float sum_marks = 0;
+    infile.open(*filename, ios::in); //here we are opening the file for reading mode
+    //display error and exit if file open fails
+    if(!infile.is_open()) {
+        cout <<"Input File open failed!!!";
+        exit(EXIT_FAILURE);
+    }
+    index = 0;
+    while(infile >> word){ //loop through each word in file
+        sum_marks = 0;
+        //Reading student name
+        student_array[index].student_info.name = word; //store the word in structure variable
+        infile >> word;
+        student_array[index].student_info.id = word; //store the word in structure variable id
+        //reading course names
+        infile >> word;
+        student_array[index].course_info.course_name = word; //store the word in structure variable course_name
+        //Reading number of units id
+        infile >> word;
+        student_array[index].course_info.no_of_units = stoi(word); //convert word to int and store the word in structure variable no_of_units
+        //Reading marks
+        for(i=0; i < student_array[index].course_info.no_of_units; i++)
+            {
+            infile >> word; //Read word from file
+            student_array[index].course_info.marks[i] = stoi(word); //convert word to int and store in structure variable exercise array
+            sum_marks = sum_marks + student_array[index].course_info.marks[i]; //Adding mark to sum_marks
+        }
+        //calculating average
+        student_array[index].course_info.avg = (sum_marks / student_array[index].course_info.no_of_units);
+        index++; //increment index to store next Student details
+    }
+    infile.close(); //close the file
+
+    return index;
+}
+//function to display menu to user****************************************
+int menu(){
+    int choice;
+    //display menu
+    cout <<"Menu";
+    cout <<"1. Display student s details"<<endl;
+    cout<<"2. Sort the student s details"<<endl;
+    cout <<"3. Search for a particular student s mark."<<endl;
+    cout <<"4. Find the details of student who received maximum average"<<endl;
+    cout <<"5. Add new student to the record"<<endl;
+    cout<<"6. Quit program.\nYour choice: "<<endl;
+    cin >> choice;
+    while (choice < 1 || choice >6){
+        cout <<"Please try again! Your input is invalid!\n";
+        cout <<"Your choice: ";
+        cin >> choice;
+    }
+}
+void display_students(struct student_tag *student_array, int num_students){
+    int i, j;
+    for(i=0; i<num_students; i++){
+        cout <<endl;
+        cout <<"Name: "<<student_array[i].student_info.name<<endl;
+        cout <<"Id: "<<student_array[i].student_info.id<<endl;
+        cout <<"Course Name: "<<student_array[i].course_info.course_name<<endl;
+        cout <<"Number of units: "<<student_array[i].course_info.no_of_units<<endl;
+        for(j=0; j<student_array[i].course_info.no_of_units; j++){
+            cout <<endl <<student_array[i].course_info.marks[j];
+        }
+        cout<<endl;
+        cout <<"Average: "<<setprecision(2) << fixed << student_array[i].course_info.avg;
+        cout <<endl;
+    }
+}
+//function to sort the structure array in Albhabetical
+void sort_by_name(struct student_tag *student_array, int num_students){
+    int i, j;
+    for(i=0; i<num_students; i++)
+        {
+            for(j=i+1; j<num_students; j++)
+            {
+                if(student_array[i].student_info.name > student_array[j].student_info.name)
+                {
+                    //swapping struc
+                    struct student_tag temp = student_array[i];
+                    student_array[i] = student_array[j];
+                    student_array[j] = temp;
+                    }
+            }
+        }
+               cout <<endl;
+}
+//function to sort the structure array in Ascending
+void sort_by_average(struct student_tag *student_array, int num_students){
+    int i, j;
+    //sorting
+    for(i=0; i<num_students; i++)
+        {
+            for(j=i+1; j<num_students; j++)
+            {
+                if(student_array[i].course_info.avg > student_array[j].course_info.avg)
+                {
+                    struct student_tag temp = student_array[i];
+                    student_array[i] = student_array[j];
+                    student_array[j] = temp;
+                    }
+                }
+        }
+
+
+
+               cout <<endl;
+
+}
+
+//function to search for name lineraly
+
+int linearSearch(struct student_tag *student_array, int num_students, string name){
+    int i;
+    //searching - Linear Search
+    for(i=0; i<num_students; i++) {
+            if(student_array[i].student_info.name == name)
+             return i;
+               }
+            return -1;
+}
+//function to binary search for name
+int binarySearch(struct student_tag *student_array, int start, int end, string name){
+    //searching
+    if (end >= start) {
+    int mid = start + (end - start) / 2;
+    // If the element is middle one
+        if (student_array[mid].student_info.name == name)
+            return mid;
+        // If element is smaller than what we have on middle
+        if (student_array[mid].student_info.name > name)
+            return binarySearch(student_array, start, mid - 1, name);
+        // Else the element can only be present in right subarray
+        return binarySearch(student_array, mid + 1, end, name);
+    }
+    //when no element is present then we will return -1
+    return -1;
+}
+//function to find student with maximum average
+int find_maximum(struct student_tag *student_array, int num_students){
+    int i;
+    int max_average_position;
+    float max_avg;
+    //Finding maximum average and then position that student in array
+    max_average_position = 0;
+    max_avg = 0;
+               for(i=0; i<num_students; i++) {
+                   if(student_array[i].course_info.avg > max_avg){
+                       max_avg = student_array[i].course_info.avg;
+                       max_average_position = i;
+                   }
+               }
+               return max_average_position;
+}
+//function to add new student details
+
+void update_file(string *filename, struct student_tag *student_array){
+    float sum_marks = 0;
+    int i;
+    string value1;
+    int value2;
+    ofstream outfile; //declaring file variable
+    outfile.open(*filename, ios::app); //open the file in read mode
+    //display error and exit if file open fails
+    if(!outfile.is_open()) {
+        cout <<"input file did not open";
+        exit(EXIT_FAILURE);
+    }
+    cout <<"\nEnter the student details to be added: ";
+    cout <<"\nName: ";
+    cin >>value1;
+    outfile << value1;
+    outfile << "\n";
+    cout <<"Id: ";
+    cin >> value1;
+    outfile << value1;
+    outfile << "\n";
+    cout <<"Course Name: ";
+    cin >> value1;
+    outfile << value1;
+    outfile << "\n";
+    cout <<"Number of units: ";
+    cin >> value2;
+    outfile << value2;
+    outfile << "\n";
+    int num_units = value2;
+    cout <<"Enter the marks: ";
+    for(i=0; i < num_units; i++){
+        cin >> value2;
+        outfile << value2;
+        outfile << "\n";
+    }
+    outfile.close();
+    int result = read_file(filename, student_array);
+}
+

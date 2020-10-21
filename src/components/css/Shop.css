@@ -1,0 +1,18 @@
+.shopHeading{
+    display:flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5vw;
+    
+}
+.product{
+    background-color: rgba(36, 32, 32, 0.274);
+    width: 100vw;
+    height: 100vh;
+}
+.headingLogo{
+    border-radius: 50%;
+    border-style: solid;
+    border-color: black;
+}

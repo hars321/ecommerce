@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital@0;1&display=swap');
+.Register{
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../images/MainPurple.svg');
+}
+.backg{
+  
+
+    /* background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+  z-index: 200;
+}
+.Register-Card{
+    background: #BE93C5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #7BC6CC, #BE93C5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #7BC6CC, #BE93C5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    box-shadow: 10px 10px 80px 10px  black;
+    height: 60vmin;
+    width: 60vmin;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: x-large;
+    font-family: 'Ubuntu', sans-serif;
+
+      
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(5px);
+    height: 100%;
+    width: 100%;
+    
+}
+.input-field{
+    background-color: rgba(255, 255, 255, 0.253);
+    border: none;
+    border-color: rgba(0, 0, 0, 0.199);
+    border-bottom: solid rgba(0, 0, 0, 0.377);
+}
+.button{
+    background-color: rgba(255, 255, 255, 0.253);
+    border: none;
+    /* border-color: rgba(0, 0, 0, 0.199); */
+    border: solid rgba(12, 11, 11, 0.658);
+    
+    font-size: x-large;
+}
+.register-element{
+    margin: 2rem;
+    align-items: center;
+}
+.heading{
+    font-size: xx-large;
+}
+
+.register-buttons{
+    display: flex;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(5px);
+}
+.button{
+    background-color: transparent;
+}
+.state-button{
+    border: none;
+    border-bottom: solid black;
+    font-size: larger;
+    
+}
+
+.button:focus{
+    outline: 0;
+}

@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap&family=Krona+One&display=swap');
+.Category-strip{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    /* padding: 5rem; */
+}
+@media only screen and (max-width: 800px) {
+    .Category-strip{
+    
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+}

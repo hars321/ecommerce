@@ -1,0 +1,30 @@
+
+.product-category{
+    padding-bottom: 15px;
+    color:white;
+    border-bottom-style: solid;
+    border-color: white;
+    margin: 1rem;
+    text-align: center;
+}
+.product-category h3{
+    font-size: 2rem;
+}
+.product-spread{
+    overflow: auto;
+    width: 100%;
+    display: flex;
+}
+.product-strip-parent{
+    margin:2rem;
+    border-style: solid;
+    border-color: white;
+    border-radius: 1rem;
+}
+.product-strip-child{
+    padding: 1rem;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
