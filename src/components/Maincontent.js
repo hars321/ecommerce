@@ -66,7 +66,7 @@ render(){
           <div className="Category-Heading">
             <h1 className="categoryHeading">CATEGORY</h1>
           </div>
-          <div className="Category-List blur">
+          <div className="Category-List ">
               <Category/>
           </div>
         </div>
