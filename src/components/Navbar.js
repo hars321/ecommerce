@@ -6,14 +6,35 @@ class Navbar extends Component{
   constructor(props){
     super(props)
       this.state={
+        loggedin:this.props.loggedin,
         user_name:"User",
         user_id:"/user/"
       }
+      this.logout=this.logout.bind(this);
+  }
+  componentDidMount(){
+    
+    if(this.props.loggedin){
+      this.setState({
+        loggedin:true,
+        user_name:sessionStorage.getItem("user_name"),
+        user_id:sessionStorage.getItem("user_id")
+      })
+    }
+    
+  }
+  logout(){
+    sessionStorage.clear();
+    this.setState({
+      loggedin:false
+    })
   }
   render(){
     return(
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+      <a href="/">
       < img className="logo" src={logo}></img>
+      </a>
       <a class="navbar-brand" href="/">E-SHOP</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -33,7 +54,7 @@ class Navbar extends Component{
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/product">Product</a>
-              <a class="dropdown-item" href="/category">Category</a>
+              <a class="dropdown-item" href="/nearby">Category</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/sellers/nearby">Seller</a>
               <a class="dropdown-item" href="/shop/nearby">Shop</a>
@@ -44,7 +65,11 @@ class Navbar extends Component{
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="./register">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login / Signup</button>
+          {
+            this.state.loggedin?<button class="btn btn-outline-success my-2 my-sm-0" type="button" onClick={this.logout}>Logout</button>:
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login / Signup</button>
+          }
+        
         </form>
       </div>
     </nav>

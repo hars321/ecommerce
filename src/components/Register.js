@@ -27,6 +27,7 @@ class Register extends Component{
         return(
             <div className="Register">
                 
+                {/* login */}
                 {this.state.register=="login"?
                     <div className="Register-Card">
                         
@@ -40,6 +41,7 @@ class Register extends Component{
                 
                     </div>
                 :
+                // register
                     <div className="Register-Card">
                         
                         <Signup/>
