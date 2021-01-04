@@ -31,6 +31,7 @@ class Category extends Component{
                     var category=data[i].product_category;
                     var description=truncate(data[i].product_description);
                     var price=data[i].product_price;
+                    var url="http://localhost:3000/item/"+id;
                     var card=<Card 
                     id={id}
                     image={image}
@@ -38,6 +39,7 @@ class Category extends Component{
                     category={category}
                     description={description}
                     price={`$ ${price}`}
+                    url={url}
                     />
                     
                     cards.push(card);

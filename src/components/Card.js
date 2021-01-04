@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './css/Card.css';
 
 class Card extends Component{
+   
     render(){
         return(
             <div className="card-parent">
@@ -26,7 +27,9 @@ class Card extends Component{
                              {this.props.price}
                         </div>
                         <div className="product-buy">
-                            <input type="button" className="addtocart" value="SEE MORE"></input>
+                            <a href={this.props.url}>
+                                <input type="button" className="addtocart" value="SEE MORE"></input>
+                            </a>
                         </div>
                        
                        

@@ -6,6 +6,7 @@ import Register from './components/Register';
 import ShopProduct from './components/ShopProduct';
 import Shopcategory from './components/ShopCategory';
 import Shop from './components/Shop';
+import Item from './components/Item/Item';
 import addProductPage from './components/AddProduct/AddProductPage';
 import { Router, Route,Switch} from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
@@ -25,7 +26,12 @@ class App extends Component{
   render(){
     return (
       <div>
+        {this.state.loggedin?
         <Navbar loggedin={this.state.loggedin}/>
+        :
+        <Navbar loggedin={this.state.loggedin}/>
+        }
+        
         <BrowserRouter>
           
         <Route exact path='/' component={Maincontent}></Route>
@@ -34,6 +40,7 @@ class App extends Component{
         <Route exact path='/addProduct' component={addProductPage}></Route>
         <Route path='/shop/:id' component={Shop}></Route>
         <Route path='/register' component={Register}></Route>
+        <Route path='/item' component={Item}></Route>
         </BrowserRouter>
         {/* <Maincontent/>
         <Shopbyproduct/> */}

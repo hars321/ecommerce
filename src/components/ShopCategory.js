@@ -8,11 +8,12 @@ class Category extends Component{
     
     constructor(props){
         super(props);
-        this.state = {loading: 1,
-                    currentPage:0,
-                    category:[],
-                    data:[],
-                    pagecount:0
+        this.state = {
+          loading: 1,
+          currentPage:0,
+          category:[],
+          data:[],
+          pagecount:0
         }
         this.PageUp = this.PageUp.bind(this);
         this.PageDown = this.PageDown.bind(this);
@@ -36,12 +37,13 @@ class Category extends Component{
                     var name=data[k].category_name;
                     var image=data[k].category_image;
                     var description=truncate(data[k].category_description);
-                    
+                    var link="http://localhost:4000/getdata/product/id/"+"id";
                     var card=<Card 
                     key={id}
                     image={image}
                     name={name}
                     description={description}
+                    link={link}
                     />
 
                     cards.push(card)
